@@ -17,6 +17,7 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
+          echo "Importing validated NUMO OGS source..."
           git init repo
           cd repo
           git remote add source https://github.com/kuateric/ogs.git

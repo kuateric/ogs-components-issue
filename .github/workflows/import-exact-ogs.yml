@@ -1,0 +1,26 @@
+name: Import exact corrected OGS source
+
+on:
+  push:
+    paths:
+      - '.github/workflows/import-exact-ogs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Import exact validated OGS source
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git init repo
+          cd repo
+          git remote add source https://github.com/kuateric/ogs.git
+          git remote add target https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+          git fetch --depth=1 source 5e0c4c0971996d36112e30508074d8f56fb2a60d
+          test "$(git rev-parse FETCH_HEAD)" = "5e0c4c0971996d36112e30508074d8f56fb2a60d"
+          git push target FETCH_HEAD:refs/heads/main --force

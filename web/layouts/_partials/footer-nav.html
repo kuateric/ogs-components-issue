@@ -1,0 +1,36 @@
+{{ if .PrevInSection | or .NextInSection }}
+
+{{ $segments := split .RelPermalink "/" }}
+{{ $subsection := index $segments 2 }}
+
+<div class="flex text-sm mb-4" data-pagefind-ignore>
+  <div class="w-1/2">
+    {{ if .NextInSection }}
+    {{ $nextSubsection := index (split .NextInSection.RelPermalink "/") 2 }}
+    {{ if eq $nextSubsection $subsection }}
+    <a href="{{ .NextInSection.Permalink }}" title="{{ .NextInSection.Permalink }}">
+      <div class="mb-1"><i class="far fa-arrow-left"></i> Previous</div>
+      <div class="italic">
+        {{ .NextInSection.Title }}
+      </div>
+    </a>
+    {{ end }}
+    {{ end }}
+  </div>
+  <div class="w-1/2 text-right">
+    {{ if .PrevInSection }}
+    {{ $prevSubsection := index (split .PrevInSection.RelPermalink "/") 2 }}
+    {{ if eq $prevSubsection $subsection }}
+    <div class="tr">
+      <a href="{{ .PrevInSection.Permalink }}" title="{{ .PrevInSection.Permalink }}">
+        <div class="mb-1">Next <i class="far fa-arrow-right"></i></div>
+        <div class="italic">
+          {{ .PrevInSection.Title }}
+        </div>
+      </a>
+    </div>
+    {{ end }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}

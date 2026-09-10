@@ -1,0 +1,79 @@
+[project]
+name = "OGS-Test-Environment"
+version = "0.1.0"
+description = "Test environment for Notebook-based tests"
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+dependencies = [
+  ### nb environment ###
+  # Use no-X11 version on Linux:
+  "gmsh>=4.13.1.dev1,<5",
+  "h5py>=3.8",
+  "heatsource-py @ git+https://github.com/joergbuchwald/heatsource_thm@bbd5bab17fc2ec228c773e087dc847e1ad5f9a4c",
+  "ipywidgets",
+  "jupyterlab>=3.4.8",
+  "matplotlib>=3.6",
+  "numpy",
+  "glaciationBCs @ git+https://github.com/cbsilver/glaciationBCs.git@1a7feb2ce1e019e242fecd8d94d8633474042e97",
+  # When changing ogstools version, update in testrunner.py
+  # (binder_tag) and header.html ($tools_url) as well!
+  "ogstools @ git+https://gitlab.opengeosys.org/ogs/tools/ogstools.git@0.8.1.RC0",
+  "pandas>=1.5",
+  "pyvista[all]",
+  "seaborn>=0.12",
+  "VTUinterface>=0.704",
+  "lxml>=6.0.2",
+  ### dev tools ###
+  "jupytext>=1.14.5",
+  "nbconvert>=7.16.5",
+  "nbformat>=5.7.3",
+  "papermill>=2.6.0",
+  "pytest>=8.2.2",
+  "toml>=0.10.2",
+  "coverage>=7.13",
+  "pytest-cov",
+]
+
+# Usage:
+# uv run --group ogs-local pytest
+# uv run --group ogs-master --upgrade-package ogs pytest
+# uv run --group ogs-pypi --upgrade-package ogs pytest
+# --upgrade-package uses latest, ignoring version in lockfile
+[dependency-groups]
+ogs-local = ["ogs"]
+ogs-master = ["ogs>=6.5.6.dev0"] # Bump after release!
+ogs-pypi = ["ogs"]
+
+[tool.uv]
+conflicts = [
+  [
+    { group = "ogs-local" },
+    { group = "ogs-master" },
+    { group = "ogs-pypi" },
+  ],
+]
+
+[tool.uv.sources]
+gmsh = { index = "gmsh-nox", marker = "platform_system == 'Linux'" }
+ogs = [
+  { path = "../..", group = "ogs-local" },        # builds ogs from local source
+  { index = "ogs-gitlab", group = "ogs-master" }, # fetches last master wheel from GitLab
+  # ogs-pypi implicit
+]
+
+[[tool.uv.index]]
+name = "gmsh-nox"
+url = "https://gmsh.info/python-packages-dev-nox"
+explicit = true
+
+[[tool.uv.index]]
+name = "ogs-gitlab"
+url = "https://gitlab.opengeosys.org/api/v4/projects/120/packages/pypi/simple"
+explicit = true
+
+[tool.coverage.run]
+branch = true
+patch = ["subprocess"]
+parallel = true
+source = ["."]
+omit = ["**/seabed_response_dolfinx.py"]

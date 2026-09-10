@@ -1,0 +1,119 @@
+{{ define "main" }}
+
+{{ $elements := index (split .CurrentSection "/") }}
+{{ $top_section_name := index $elements (sub (len $elements) 4) }}
+{{ $baseSubsection := . }}
+{{ if eq $top_section_name .Section }}
+{{ $baseSubsection = .Parent }}
+{{ end }}
+{{ if not .IsSection }}
+{{ $baseSubsection = .Parent.Parent }}
+{{ end }}
+
+<div class="flex">
+
+  {{ partial "docs/sidebar.html" . }}
+
+  <div class="overflow-y-auto focus:outline-none">
+
+    {{ if isset .Params "coupling" }}
+    {{ $img := printf "images/coupling-icons/%s-tet.svg" .Params.coupling }}
+    <img class="h-12 md:h-16 lg:h-20 float-right" src="{{ absURL $img }}" alt="">
+    {{ else if isset .Parent.Params "coupling" }}
+    {{ $img := printf "images/coupling-icons/%s-tet.svg" .Parent.Params.coupling }}
+    <img class="h-12 md:h-16 lg:h-20 float-right" src="{{ absURL $img }}" alt="">
+    {{ end }}
+
+    {{ if .Params.breadcrumbs }}
+    {{ partial "docs/breadcrumbs.html" . }}
+    {{ end }}
+
+    <div class="mx-auto py-2 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-4">
+      <h1 class="text-3xl font-extrabold sm:text-4xl mb-8">{{ .Title }}</h1>
+      {{ if $baseSubsection.Params.os_selector }}
+      <div class="flex justify-center">
+        <div class="invisible mb-8 bg-gray-200 shadow rounded-lg px-2 py-1 w-auto" id="os-selector">
+          <span class="text-gray-600">Select OS:</span>
+          <a class="btn mx-1" id="btn-win"><i class="fab fa-windows"></i><span class="hidden sm:inline">
+              Windows</span></a>
+          <a class="btn mx-1" id="btn-linux"><i class="fab fa-linux"></i><span class="hidden sm:inline">
+              Linux</span></a>
+          <a class="btn mx-1" id="btn-mac"><i class="fab fa-apple"></i><span class="hidden sm:inline"> macOS</span></a>
+        </div>
+      </div>
+      {{ end }}
+
+      {{ if eq .Params.toc true }}
+      {{/* "block md:hidden" only shows on small screen sizes */}}
+      <div class="block md:hidden mb-4">
+        <details>
+          <summary>
+            <span class="font-bold text-brand-500">Table of Contents</span>
+            <span class="text-sm italic text-gray-700">(click to toggle)</span>
+          </summary>
+          <div class="ml-4 mt-2">
+            {{.TableOfContents}}
+          </div>
+        </details>
+      </div>
+      {{ end }}
+
+      <div class="section-docs prose prose-sm lg:prose max-w-none lg:max-w-none">
+
+
+        {{ $items := slice }}
+
+        {{ range $p := .Page.Params.projects }}
+        {{ $items = $items | append (dict "type" "project" "name" $p) }}
+        {{ end }}
+
+        {{ range $m := .Page.Params.models }}
+        {{ $items = $items | append (dict "type" "model" "name" $m) }}
+        {{ end }}
+
+        <div class="grid auto-cols-max grid-flow-col justify-around">
+
+          {{ range $item := $items }}
+          {{ with site.GetPage (printf "%s/%s" (pluralize $item.type) (urlize $item.name)) }}
+
+          {{ $link := .Permalink }}
+          {{ $logo := .Resources.Get "logo.svg" }}
+          {{ if not $logo }}
+          {{ $logo = .Resources.Get "logo.png" }}
+          {{ end }}
+          {{ if not $logo }}
+          {{ $logo = .Resources.Get "logo.jpg" }}
+          {{ end }}
+
+          {{ with $logo }}
+          <div>
+            <a href="{{ $link }}">
+              <img src="{{ .RelPermalink }}" alt="{{ $item.type }} logo" class="h-16 no-fancybox">
+            </a>
+          </div>
+          {{ end }}
+          {{ end }}
+          {{ end }}
+        </div>
+
+        {{ .Content }}
+      </div>
+
+      <hr class="border my-4">
+      {{ partial "footer-nav.html" . }}
+
+      {{ partial "page-info" . }}
+    </div>
+  </div>
+
+  {{ if eq .Params.toc true }}
+  {{/* "hidden md:flex" hides on small screen sizes */}}
+  <div class="hidden md:flex md:shrink-0">
+    <div class="w-48 md:w-64 lg:w-72 pl-2 pr-4 mt-1 text-sm lg:text-base overflow-y-auto h-screen sticky top-0 right-0">
+      <div class="mb-2 font-bold text-brand-500">On this page</div>
+      {{.TableOfContents}}
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}

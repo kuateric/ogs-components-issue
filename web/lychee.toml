@@ -1,0 +1,20 @@
+accept = ["100..=103", "200..=299", "302", "403"]
+
+exclude = [
+  "gitlab\\.opengeosys\\.org",
+  "discourse\\.opengeosys\\.org",
+  "vip\\.s3\\.ufz\\.de/ogs/public/binaries/ogs6",
+  "discourse\\.opengeosys.org/t/",
+  "localhost:1313",
+  "smartkd-concept\\.de",
+  "all\\.css",
+  "eigen\\.tuxfamily.org",
+  "www\\.ufz\\.de/vislab",
+  "mont_terri_experimente.html",
+  "coolprop\\.org",
+  "www\\.gpdn\\.de",
+  "gitlab\\.io",
+  "overleaf\\.com",
+  "web\\.archive\\.org/",
+]
+exclude_path = ["public/releases/", "public/docs/featurematrix/bundle/"]

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<VTKFile type="UnstructuredGrid" version="0.1" byte_order="LittleEndian" compressor="vtkZLibDataCompressor">
+<!--This file was created by meshio v5.3.5-->
+<UnstructuredGrid>
+<Piece NumberOfPoints="49" NumberOfCells="48">
+<Points>
+<DataArray type="Float64" Name="Points" NumberOfComponents="3" format="binary">
+AQAAAACAAACYBAAAdwEAAA==eJxl1D1IAmEYB3DpY8ipwakhCkKkoaCGChEJAmenlougwdpSaghrrCGIjkSC2uKWBruhhBoq6JwCwQjqQKKspK7OqKyzDxN7HuGluP+zKD/kfb7eV4fjf5z4xbfeWqT8dhexvsZRgd/bPVTHrsA5cqWHfAd8dDtNsQ8uzl8+tDySfApejprBvdYz8M7+66hL1cFjpXMl7MuC9yU5/wX4xKRGia/ACy5J1qwceEeRz78BlzJU5sIteDzBefPg6cUANXAH3jDO9dyDe4d8Tl0xwKfaKa35AG7U9mBindktSlzAOndp/NoT1hmndp3P4PUDNB7PC/jYJveL3t1C5YdfwVNLPIcieFN1nhaPfhTh+byBz+WrFOjNwzy3d/CuY7o+AQt82svzRN9Q+X6WwFfb+PMDfCVGY9PRDxpVavgT9z7D9/wL3P3Ie0GfHQlRfINHMryvMnhukN8LupGkdoM/4Jduvv9/Lt67/X9AvHe7i/du918zDzNr
+</DataArray>
+</Points>
+<Cells>
+<DataArray type="Int64" Name="connectivity" format="binary">
+AQAAAACAAAAAAwAAZwAAAA==eJxdy0UCggAAAEFMFIOyGwM7/v86D+Jl9jKnDYJfTWxhG2sYYge7GGEP+zjAIcaYYIoZ5jjCMU5wijOc4wKXuMI1bnCLOyxwjwc84glLPOMFr3jDOz7wiY3KeuUL3/jB//8FIJ4JLw==
+</DataArray>
+<DataArray type="Int64" Name="offsets" format="binary">
+AQAAAACAAACAAQAAZwAAAA==eJwtxdEGwgAAAMAkk2RmkpnMJMkkSZJkJkmSJJNk0v9/RQ/dvVy79ddx4K577jt05NgDD5049ciZc4898dQzF5574aVXXnvjrXfeu3Tlg48++eyLr7757odrP/3y240//voHyrwJMQ==
+</DataArray>
+<DataArray type="Int64" Name="types" format="binary">
+AQAAAACAAACAAQAAEAAAAA==eJxjZoAA5lF6QGgAb8AAkQ==
+</DataArray>
+</Cells>
+<PointData>
+<DataArray type="UInt64" Name="bulk_node_ids" format="binary">
+AQAAAACAAACIAQAAXgAAAA==eJwtxccRggAAADBOdAx7V0CxgGDFzv4L+TD5pBH8hW665bY77rrnvgceeuSxJ5565rkXXjpy7MQrr51646133jtz7oMLlz765LMvvvrmync//PTLb3/8de0fmssJBg==
+</DataArray>
+</PointData>
+<CellData>
+<DataArray type="UInt64" Name="bulk_element_ids" format="binary">
+AQAAAACAAACAAQAAXAAAAA==eJwtxUkCgQAAAEC/IFSUsmSn7IT4/5MczFym3frrOHDXPfcdOnLsgYdOnHrkzLnHnnjqmQvPvfDSK6+98dY771268sFHn3z2xVfffPfDtZ9++e3GH3/9A47LCLk=
+</DataArray>
+</CellData>
+</Piece>
+</UnstructuredGrid>
+</VTKFile>

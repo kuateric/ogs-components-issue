@@ -1,48 +1,32 @@
-# OGS-NUMO
+# OpenGeoSys 6
 
-Reproducible OGS build for the NUMO ComponentTransport / PHREEQC validation case.
+[![Modified BSD License](http://img.shields.io/badge/license-BSD-blue.svg?style=flat-square)](https://gitlab.opengeosys.org/ogs/ogs/-/blob/master/LICENSE.txt)
+[![DOI](https://zenodo.org/badge/1701384.svg)](https://zenodo.org/badge/latestdoi/1701384)
 
-This repository provides a reproducible installer for the exact corrected OGS source used in the NUMO investigation. The numerical correction is a positivity-preserving, RHS-consistent row-sum lumping of the ComponentTransport reaction projection.
+[OpenGeoSys][ogs] (OGS) is a scientific open source project for the development of
+numerical methods for the simulation of thermo-hydro-mechanical-chemical
+(THMC) processes in porous and fractured media. OGS is implemented in C++, it
+is object-oriented with an focus on the numerical solution of coupled multi-field
+problems (multi-physics). Parallel versions of OGS are available relying on
+both MPI and OpenMP concepts. Application areas of OGS are currently CO2
+sequestration, geothermal energy, water resources management, hydrology and
+waste deposition. OGS is comprised of the THMC-simulator (simply referred to as
+*OGS*) and a visualization tool (*Data Explorer*). OGS is developed by the
+[OpenGeoSys Community][ogs].
 
-## Exact validated source
+## Software development
 
-- Source repository: `kuateric/ogs`
-- Branch used during validation: `agent/numo-reaction-mass-lumping-6.5.8`
-- Exact validated commit: `5e0c4c0971996d36112e30508074d8f56fb2a60d`
-- Core correction commit: `c31898e2de9a29fa131b959cf52455986c69e98e`
-
-## Important scope
-
-The correction removes the previously observed negative-concentration / NaN projection problem in the NUMO case. It does **not** modify the NUMO chemistry, physics, boundary conditions, stabilization, or time stepping.
-
-The original NUMO project/input files are intentionally **not redistributed here**. Place the original files supplied by NUMO into `numo-case/` and keep their original filenames. This avoids publishing project data while still allowing an exact reproduction with the corrected executable.
-
-## Build and run
-
-On a Linux machine with the normal OGS build prerequisites:
-
-```bash
-git clone https://github.com/kuateric/ogs-numo.git
-cd ogs-numo
-./scripts/install_ogs_numo.sh
-```
-
-This clones the exact validated OGS commit and builds the `ComponentTransport` process.
-
-Then copy the original NUMO case files into `numo-case/` and run:
-
-```bash
-./scripts/run_numo.sh
-```
-
-The wrapper refuses to run if the expected project file is missing.
-
-## NUMO case filename expected
-
-`shotcrete4_linear_closed_fixed_primary_D1e-12.prj`
-
-The investigation established that the corrected transport formulation remains finite through time step 40. The very long Step40 runtime is dominated by PHREEQC chemistry in local chemical system 7; Step41 subsequently fails during initial aqueous speciation of the same local system. Those chemistry diagnostics are separate from the ComponentTransport mass-lumping correction.
+- Good starting point for users as well as for developers is the [documentation][documentation]
+- Check your code against our [style guide](https://ufz.github.io/styleguide/cppguide.xml)
+- Have a look at the [source code documentation for the current master-branch build][docs-master] or [for the latest release][docs-release]
 
 ## License
 
-The OGS source cloned by the installer remains under the OpenGeoSys BSD-3-Clause license. See the upstream OGS license for details.
+OpenGeoSys is distributed under the Modified BSD License. See the
+[LICENSE.txt][license-source] for the license text.
+
+[ogs]: https://www.opengeosys.org
+[documentation]: https://www.opengeosys.org/docs/
+[docs-master]: https://doxygen.opengeosys.org/
+[docs-release]: https://doxygen.opengeosys.org/6.5.8
+[license-source]: https://github.com/ufz/ogs/blob/master/LICENSE.txt

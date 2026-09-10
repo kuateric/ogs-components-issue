@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: Copyright (c) OpenGeoSys Community (opengeosys.org)
+# SPDX-License-Identifier: BSD-3-Clause
+
+try:
+    import ogs.callbacks as OpenGeoSys
+except ModuleNotFoundError:
+    import OpenGeoSys
+
+
+class BCPressure(OpenGeoSys.BoundaryCondition):
+    def getDirichletBCValue(self, _t, coords, _node_id, _primary_vars):
+        x, _y, z = coords
+
+        if x == -150 and z == 75:
+            # prescribe pressure of 0
+            return (True, 0.0)
+
+        # no Dirichlet BC
+        return (False, 0.0)
+
+
+class BCConcentration(OpenGeoSys.BoundaryCondition):
+    def getDirichletBCValue(self, _t, coords, _node_id, _primary_vars):
+        x, _y, z = coords
+
+        if z == -75:
+            # prescribe concentration of 0
+            return (True, 0.0)
+
+        if z == 75 and x >= 0:
+            # prescribe concentration of 1
+            return (True, 1.0)
+
+        # no Dirichlet BC
+        return (False, 0.0)
+
+
+# instantiate the BC objects used by OpenGeoSys
+bc_p = BCPressure()
+bc_c = BCConcentration()

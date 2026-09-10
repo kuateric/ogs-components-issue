@@ -1,0 +1,174 @@
+languageCode = "en-us"
+title = "OpenGeoSys"
+theme = "ogs"
+buildDrafts = false
+buildFuture = true
+enableGitInfo = true
+publishDir = "@OGS_WEB_WORKSPACE_DIR@/public"
+resourceDir = "@OGS_WEB_WORKSPACE_DIR@/resources"
+cacheDir = "@OGS_WEB_WORKSPACE_DIR@/cache"
+
+[module]
+[[module.mounts]]
+source = '@PROJECT_SOURCE_DIR@/web/content'
+target = 'content'
+files = ["! **/notebook-*.md", "! img/**", "**"]
+[[module.mounts]]
+source = '@PROJECT_SOURCE_DIR@/web/static'
+target = 'static'
+[[module.mounts]]
+source = '@OGS_WEB_WORKSPACE_DIR@/static'
+target = 'static'
+@OGS_WEB_GENERATED_CONTENT_MOUNTS@
+
+[markup.goldmark.renderer]
+unsafe = true
+[markup.goldmark.extensions.passthrough]
+enable = true
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [['\[', '\]'], ['$$', '$$']]
+inline = [['\(', '\)'], ['$', '$']]
+
+[markup.highlight]
+style = "monokailight"
+
+[params]
+alert = ""
+currentVersion = "dev"
+
+[[menu.main]]
+name = "Discourse"
+weight = 10
+url = "https://discourse.opengeosys.org"
+
+[[menu.main]]
+name = "Source Code"
+weight = 11
+url = "https://gitlab.opengeosys.org/ogs/ogs"
+
+# Devguide sidebar menu top-level categories
+[[menu.devguide]]
+name = "Getting Started"
+identifier = "getting-started"
+weight = 1
+
+[[menu.devguide]]
+name = "Development Workflows"
+identifier = "development-workflows"
+weight = 2
+
+[[menu.devguide]]
+name = "Testing"
+identifier = "testing"
+weight = 3
+
+[[menu.devguide]]
+name = "Third-party packages"
+identifier = "packages"
+weight = 4
+
+[[menu.devguide]]
+name = "Execution Environments"
+identifier = "environments"
+weight = 5
+
+[[menu.devguide]]
+name = "Advanced"
+identifier = "advanced"
+weight = 6
+
+[[menu.devguide]]
+name = "Troubleshooting"
+identifier = "troubleshooting"
+weight = 7
+
+[[menu.devguide]]
+name = "Procedures"
+identifier = "procedures"
+weight = 8
+
+# Quickstart sidebar top-level categories
+[[menu.userguide]]
+name = "Basics"
+identifier = "basics"
+weight = 1
+[[menu.userguide]]
+name = "Troubleshooting"
+identifier = "troubleshooting"
+weight = 2
+[[menu.userguide]]
+name = "Process Dependent Configuration"
+identifier = "process-dependent-configuration"
+weight = 4
+
+# Tools sidebar top-level categories
+[[menu.tools]]
+name = "Getting Started"
+identifier = "getting-started"
+weight = 1
+
+[[menu.tools]]
+name = "Meshing: Bulk meshes"
+identifier = "meshing"
+weight = 2
+
+[[menu.tools]]
+name = "Meshing: Subdomains"
+identifier = "meshing-submeshes"
+weight = 3
+
+[[menu.tools]]
+name = "Model Preparation"
+identifier = "model-preparation"
+weight = 4
+
+[[menu.tools]]
+name = "Workflows"
+identifier = "workflows"
+weight = 5
+
+# docs
+[[menu.docs]]
+name = "Data Explorer Manual"
+url = "https://gitlab.opengeosys.org/ogs/documentation/data_explorer_manual/-/jobs/artifacts/master/raw/ogsde-man.pdf?job=build"
+post = "Manual for the graphical user interface for OpenGeoSys, the Data Explorer."
+weight = 8
+[menu.docs.params]
+category = "User"
+
+[[menu.docs]]
+name = "Source code documentation"
+url = "https://ogs.ogs.xyz/ogs/doxygen/"
+post = "The OGS source code documentation is automatically generated right from the code itself via Doxygen and is a nice reference while coding."
+[menu.docs.params]
+category = "Developer"
+
+[[menu.docs]]
+name = "Styleguide"
+url = "https://ufz.github.io/styleguide/cppguide.xml"
+post = "OpenGeoSys C++ Style Guide"
+[menu.docs.params]
+category = "Developer"
+
+[[menu.docs]]
+name = "Python tools"
+url = "https://ogstools.opengeosys.org/stable/"
+post = "<em>OGSTools</em> is a collection of Python tools aimed at evolving into a modeling toolchain around OpenGeoSys."
+weight = 4
+[menu.docs.params]
+category = "User"
+
+[[menu.docs]]
+name = "DigBen & EURAD Model Hub"
+url = "/hub"
+post = "The Model Hub the entry point to a collection of interactive benchmark and validation models."
+weight = 9
+[menu.docs.params]
+category = "User"
+
+[security.funcs]
+getenv = ['^HUGO_', '^CI_']
+
+[taxonomies]
+project = 'projects'
+model = 'models'

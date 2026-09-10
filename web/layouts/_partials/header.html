@@ -1,0 +1,90 @@
+{{ $CI_COMMIT_TAG := getenv "CI_COMMIT_TAG" }}
+
+{{ $tools_url := "https://ogs.ogs.xyz/tools/ogstools/" }}
+{{ $doxygen_url := "https://ogs.ogs.xyz/ogs/doxygen/" }}
+
+{{ if $CI_COMMIT_TAG }}
+{{ $tools_url = "https://ogstools.opengeosys.org/0.8.0/" }}
+{{ $doxygen_url = printf "https://doxygen.opengeosys.org/%s/" $CI_COMMIT_TAG }}
+{{ end }}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ hugo.Generator }}
+
+<meta name="description" content="OpenGeoSys">
+<meta name="author" content="OpenGeoSys Community">
+<title>{{ .Title }}</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+<link rel="stylesheet" href='{{ relURL "css/all.css" }}'>
+<link rel="stylesheet" href='{{ relURL "css/fontawesome.css" }}'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/micromodal/dist/micromodal.min.js"></script>
+<link rel="stylesheet" href='{{ relURL "pagefind/pagefind-ui.css" }}'>
+<script src='{{ relURL "pagefind/pagefind-ui.js" }}'></script>
+<script>
+  // pagefind config
+  const ogstools_url = "{{ $tools_url }}";
+  const doxygen_url = "{{ $doxygen_url }}";
+
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({
+      element: "#search",
+      showSubResults: true,
+      pageSize: 20,
+      mergeFilter: {
+        resource: "OGS"
+      },
+      processResult: function (result) {
+        // Remove title anchors in ogstools
+        result.meta.title = result.meta.title.replace(/#$/, '');
+        // Images do not have the sites base_url included
+        if (result.meta.image) {
+          if (result.meta.image.startsWith("../../_images/")) {
+            const cleanedPath = result.meta.image.replace(/^(\.\.\/)+/, '');
+            result.meta.image = ogstools_url + cleanedPath;
+          }
+          if (result.url.startsWith("/docs/") && !(result.meta.image.startsWith("/docs/") || result.meta.image.startsWith("http"))) {
+            result.meta.image = result.url + result.meta.image;
+          }
+          if (result.meta.image.startsWith("doxygen.svg")) {
+            result.meta.image = doxygen_url + "doxygen.svg";
+          }
+        }
+        return result;
+      },
+      mergeIndex: [{
+        bundlePath: ogstools_url + "pagefind",
+        mergeFilter: {
+          resource: "OGSTools"
+        }
+      },
+      {
+        bundlePath: doxygen_url + "pagefind",
+        mergeFilter: {
+          resource: "Doxygen"
+        }
+      }]
+    });
+  });
+</script>
+
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: "ams", // enable equation numbering
+      processEnvironments: true, // e.g. \begin{equation}...\end{equation} without $-delimiter
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>

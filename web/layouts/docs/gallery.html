@@ -1,0 +1,43 @@
+{{ define "main" }}
+
+<div class="flex">
+
+  {{ partial "docs/sidebar.html" . }}
+
+  <div class="bg-white">
+    {{ if isset .Params "coupling" }}
+    {{ $img := printf "images/coupling-icons/%s-tet.svg" .Params.coupling }}
+    <img class="h-12 md:h-16 lg:h-20 float-right" data-pagefind-meta="image[src]" src="{{ absURL $img }}" alt="">
+    {{ end }}
+
+    {{ if .Page.Params.breadcrumbs }}
+    {{ partial "docs/breadcrumbs.html" . }}
+    {{ end }}
+
+    <div class="mx-auto py-2 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-4">
+      <div class="space-y-8">
+        <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
+
+          <h1 class="text-3xl font-extrabold sm:text-4xl mb-8">
+            {{ .Title }}
+          </h1>
+          <div class="clear-both"></div>
+          <div class="prose min-w-full">
+            {{ .Content }}
+          </div>
+        </div>
+
+        {{ if gt (len .Pages) 0 }}
+        <ul role="list"
+          class="grid grid-cols-2 sm:grid-cols-3  sm:gap-x-6 gap-y-12 space-y-0 lg:grid-cols-4 lg:gap-x-8">
+          {{ range where .Pages "Params.gallery" "!=" "false" }}
+          {{ partial "components/gallery-item.html" . }}
+          {{ end }}
+        </ul>
+        {{ end }}
+
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

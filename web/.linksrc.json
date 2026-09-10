@@ -1,0 +1,8 @@
+{
+  "excludePatterns": [
+    "^https?://.*localhost",
+    "^https?://github.com/ufz/ogs/releases/.*",
+    "https://dev.azure.com/ogsci/ogs/_build",
+    "https://ogs.jfrog.io/ogs"
+  ]
+}

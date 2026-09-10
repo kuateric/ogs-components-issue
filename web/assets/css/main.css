@@ -1,0 +1,393 @@
+@tailwind base;
+
+@tailwind components;
+
+
+/* -- Header anchor on docs pages */
+.headerlink {
+  @apply invisible;
+}
+
+h2:hover>.headerlink,
+h3:hover>.headerlink,
+h4:hover>.headerlink {
+  @apply visible;
+  @apply no-underline;
+}
+
+/* Inline code and blocks */
+code {
+  background-color: #fafafa;
+}
+
+cite::before {
+  content: "— ";
+}
+
+.prose-sm li pre {
+  @apply mt-2;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+#theHeader.sticky {
+  position: fixed;
+  top: 0;
+  background-color: white;
+}
+
+/* -- Table of contents -- */
+#TableOfContents a {
+  @apply text-gray-700;
+}
+
+#TableOfContents a:hover {
+  @apply text-gray-900;
+}
+
+#TableOfContents ul ul {
+  @apply ml-2;
+  @apply mt-0;
+  @apply mb-1;
+  @apply text-sm;
+}
+
+/* -- OS selector -- */
+.win {
+  @apply border-blue-200;
+  @apply border-l-2;
+  @apply -ml-4;
+  @apply pl-4;
+}
+
+.linux {
+  @apply border-yellow-200;
+  @apply border-l-2;
+  @apply -ml-4;
+  @apply pl-4;
+}
+
+.mac {
+  @apply border-gray-200;
+  @apply border-l-2;
+  @apply -ml-4;
+  @apply pl-4;
+}
+
+#btn-win.active {
+  @apply text-blue-500;
+  @apply border-brand-500;
+}
+
+#btn-linux.active {
+  @apply text-yellow-500;
+  @apply border-brand-500;
+}
+
+#btn-mac.active {
+  @apply text-gray-600;
+  @apply border-brand-500;
+}
+
+#btn-win:hover {
+  @apply border-brand-500;
+}
+
+#btn-linux:hover {
+  @apply border-brand-500;
+}
+
+#btn-mac:hover {
+  @apply border-brand-500;
+}
+
+/* -- Misc -- */
+hr {
+  @apply border;
+}
+
+a.anchorjs-link {
+  @apply border-0;
+}
+
+table {
+  @apply w-full;
+}
+
+/* -- Buttons -- */
+a.button {
+  @apply bg-white;
+  @apply text-gray-900;
+  @apply py-4;
+  @apply px-8;
+  @apply border;
+  @apply border-gray-300;
+  @apply shadow;
+  @apply rounded-lg;
+  @apply font-serif;
+  @apply font-medium;
+  @apply uppercase;
+}
+
+a.button:hover {
+  @apply bg-gray-100;
+}
+
+section.footnotes {
+  @apply text-sm;
+}
+
+section.footnotes p {
+  margin-top: 0;
+}
+
+/* -------------------------------- Images ---------------------------------- */
+body {
+  counter-reset: figcaption;
+}
+
+figcaption p::before,
+figcaption h4::before {
+  counter-increment: figcaption;
+  content: "Fig. " counter(figcaption) ": "
+}
+
+figcaption {
+  @apply text-center;
+  @apply mb-6;
+}
+
+.not-prose figcaption {
+  @apply mt-4;
+  @apply text-sm;
+}
+
+img[src$='#33%'] {
+  width: 300px;
+}
+
+img[src$='#one-third'] {
+  width: 300px;
+}
+
+img[src$='#50%'] {
+  width: 450px;
+}
+
+img[src$='#one-half'] {
+  width: 450px;
+}
+
+img[src$='#66%'] {
+  width: 600px;
+}
+
+img[src$='#two-third'] {
+  width: 600px;
+}
+
+/* ------------------------------- Components ------------------------------- */
+.btn {
+  @apply text-gray-900;
+  @apply px-2;
+  @apply py-1;
+  @apply border-b-2;
+  @apply cursor-pointer;
+}
+
+.btn.active {
+  @apply border-yellow-500;
+}
+
+.note {
+  @apply bg-yellow-50;
+  @apply px-4;
+  @apply py-1;
+  @apply mb-4;
+  @apply border-l-4;
+  @apply border-yellow-500;
+  @apply -ml-4;
+}
+
+.note h3 {
+  @apply text-yellow-600 !important;
+  @apply mt-2 !important;
+  @apply mb-2 !important;
+}
+
+/* ----------------------------- Slick Carousel ----------------------------- */
+.slick-prev:before,
+.slick-next:before {
+  font-size: 24px;
+}
+
+.slick-dots li button:before,
+.slick-dots li.slick-active button:before {
+  font-size: 8px;
+}
+
+/* Vertically center images */
+.slick-initialized .slick-track {
+  display: flex;
+  align-items: center;
+}
+
+/* ------------------------------- Jupyter --------------------------------- */
+.jupyter-input pre {
+  @apply border-l-4;
+  @apply border-blue-500;
+}
+
+.jupyter-output pre {
+  @apply border-l-4;
+  @apply border-red-500;
+}
+
+.jupyter-output img {
+  @apply border-l-4;
+  @apply border-red-500;
+  @apply rounded-md;
+}
+
+/* ------------------------------- Pagefind -------------------------------- */
+/**************************\
+  Basic Modal Styles
+\**************************/
+
+.modal {
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+}
+
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: top;
+}
+
+.modal__container {
+  @apply my-8;
+  @apply p-8;
+  @apply w-5/6;
+  @apply lg:w-2/3;
+  background-color: #fff;
+  max-height: 100vh;
+  @apply rounded-lg;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: #00449e;
+  box-sizing: border-box;
+}
+
+.modal__close {
+  background: transparent;
+  border: 0;
+}
+
+.modal__header .modal__close:before {
+  content: "\2715";
+}
+
+.modal__content {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, .8);
+}
+
+.modal__btn {
+  font-size: .875rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  background-color: #e6e6e6;
+  color: rgba(0, 0, 0, .8);
+  border-radius: .25rem;
+  border-style: none;
+  border-width: 0;
+  cursor: pointer;
+  -webkit-appearance: button;
+  text-transform: none;
+  overflow: visible;
+  line-height: 1.15;
+  margin: 0;
+  will-change: transform;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.modal__btn-primary {
+  background-color: #00449e;
+  color: #fff;
+}
+
+
+
+/**************************\
+  Animation Style
+\**************************/
+@keyframes mmfadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mmfadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.micromodal-slide {
+  display: none;
+}
+
+.micromodal-slide.is-open {
+  display: block;
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__overlay {
+  animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__overlay {
+  animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.micromodal-slide .modal__container,
+.micromodal-slide .modal__overlay {
+  will-change: transform;
+}
+
+/* ------------------------------------------------------------------------- */
+@tailwind utilities;

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<OpenGeoSysProject>
+    <time_loop>
+        <include file="steady_state_diffusion.include"/>
+        <output>
+            <type>XDMF</type>
+            <prefix>cube_1e3_np2</prefix>
+            <variables>
+                <variable> pressure </variable>
+                <variable> v      </variable>
+            </variables>
+            <suffix>_ts_{:timestep}_t_{:time}</suffix>
+            <timesteps>
+                <pair>
+                    <repeat>2</repeat>
+                    <each_steps>1</each_steps>
+                </pair>
+            </timesteps>
+        </output>
+    </time_loop>
+    <include file="cube_1e3.include"/>
+</OpenGeoSysProject>

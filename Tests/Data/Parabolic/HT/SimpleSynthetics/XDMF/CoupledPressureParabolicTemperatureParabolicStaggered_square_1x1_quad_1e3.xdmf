@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Xdmf xmlns:xi="http://www.w3.org/2001/XInclude" Version="3.0">
+<Domain>
+<Information Name="OGS_VERSION" Value="6.5.3-237-g721feae5"/>
+<Grid CollectionType="Temporal" GridType="Collection" Name="Collection">
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="0"/>
+
+	<Geometry Origin="" Type="XYZ">
+		<DataItem DataType="Float" Dimensions="1089 3" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/geometry|0 0 0:1 1 1:1 1089 3:11 1089 3</DataItem>
+	</Geometry>
+
+	<Topology Type="Quadrilateral">
+		<DataItem DataType="UInt" Dimensions="1024 4" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/topology|0 0 0:1 1 1:1 1024 4:11 1024 4</DataItem>
+	</Topology>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|0 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|0 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|0 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="0.10000000000000001"/>
+
+	<xi:include xpointer="element(/1/1/2/1/2)"/>
+
+	<xi:include xpointer="element(/1/1/2/1/3)"/>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|1 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|1 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|1 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="0.20000000000000001"/>
+
+	<xi:include xpointer="element(/1/1/2/1/2)"/>
+
+	<xi:include xpointer="element(/1/1/2/1/3)"/>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|2 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|2 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|2 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="0.30000000000000004"/>
+
+	<xi:include xpointer="element(/1/1/2/1/2)"/>
+
+	<xi:include xpointer="element(/1/1/2/1/3)"/>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|3 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|3 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|3 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="0.40000000000000002"/>
+
+	<xi:include xpointer="element(/1/1/2/1/2)"/>
+
+	<xi:include xpointer="element(/1/1/2/1/3)"/>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|4 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|4 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|4 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="0.5"/>
+
+	<xi:include xpointer="element(/1/1/2/1/2)"/>
+
+	<xi:include xpointer="element(/1/1/2/1/3)"/>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|5 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|5 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|5 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="0.60000000000000009"/>
+
+	<xi:include xpointer="element(/1/1/2/1/2)"/>
+
+	<xi:include xpointer="element(/1/1/2/1/3)"/>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|6 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|6 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|6 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="0.70000000000000007"/>
+
+	<xi:include xpointer="element(/1/1/2/1/2)"/>
+
+	<xi:include xpointer="element(/1/1/2/1/3)"/>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|7 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|7 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|7 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="0.80000000000000004"/>
+
+	<xi:include xpointer="element(/1/1/2/1/2)"/>
+
+	<xi:include xpointer="element(/1/1/2/1/3)"/>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|8 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|8 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|8 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="0.90000000000000002"/>
+
+	<xi:include xpointer="element(/1/1/2/1/2)"/>
+
+	<xi:include xpointer="element(/1/1/2/1/3)"/>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|9 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|9 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|9 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+<Grid Name="Grid" GridType="Uniform">
+    <Time Value="1"/>
+
+	<xi:include xpointer="element(/1/1/2/1/2)"/>
+
+	<xi:include xpointer="element(/1/1/2/1/3)"/>
+
+
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="T" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/T|10 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="darcy_velocity" Type="None">
+		<DataItem DataType="Float" Dimensions="1089 2" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/darcy_velocity|10 0 0:1 1 1:1 1089 2:11 1089 2</DataItem>
+	</Attribute>
+	<Attribute Center="Node" ElementCell="" ElementDegree="0" ElementFamily="" ItemType="" Name="p" Type="None">
+		<DataItem DataType="Float" Dimensions="1089" Format="HDF" Precision="8">CoupledPressureParabolicTemperatureParabolicStaggered.h5:/meshes/square_1x1_quad_1e3/p|10 0:1 1:1 1089:11 1089</DataItem>
+	</Attribute>
+</Grid>
+</Grid>
+</Domain>
+</Xdmf>

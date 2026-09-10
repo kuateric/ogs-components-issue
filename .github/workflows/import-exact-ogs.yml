@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Import exact validated OGS source
+      - name: Import validated OGS source snapshot
         shell: bash
         run: |
           set -euxo pipefail
@@ -25,17 +25,44 @@ jobs:
           VALIDATED_SHA=5e0c4c0971996d36112e30508074d8f56fb2a60d
 
           git remote add source https://github.com/kuateric/ogs.git
-
-          # Fetch the complete source branch history. A shallow fetch cannot be
-          # pushed into this independent repository because all parent commit
-          # objects referenced by the validated commit must be present.
           git fetch source "$SOURCE_BRANCH"
           git cat-file -e "$VALIDATED_SHA^{commit}"
           test "$(git rev-parse "$VALIDATED_SHA")" = "$VALIDATED_SHA"
 
-          # Safety gate: publish only a source tree containing the validated fix.
+          # Safety gate: the imported source must contain the validated
+          # RHS-consistent positivity-preserving reaction projection fix.
           git show "$VALIDATED_SHA:ProcessLib/ComponentTransport/ComponentTransportFEM.h" \
             | grep -Fq 'NUMO: positivity-preserving row-sum lumping of the reaction projection'
 
-          # Publish exactly the validated corrected source as main.
-          git push origin "$VALIDATED_SHA:refs/heads/main" --force
+          # Preserve only this repository's own import workflow. GitHub Apps
+          # cannot publish workflow files copied from another repository unless
+          # they have the separate workflows permission. The OGS build itself
+          # does not depend on upstream CI workflow files.
+          cp .github/workflows/import-exact-ogs.yml "$RUNNER_TEMP/import-exact-ogs.yml"
+
+          # Replace the index/worktree with the exact validated OGS tree. This
+          # preserves gitlinks/submodules correctly while creating a normal
+          # snapshot commit on ogs-numo's own history (no cross-repo parent
+          # dependency and no shallow-history problem).
+          git read-tree --reset -u "$VALIDATED_SHA"
+
+          rm -rf .github/workflows
+          mkdir -p .github/workflows
+          cp "$RUNNER_TEMP/import-exact-ogs.yml" .github/workflows/import-exact-ogs.yml
+
+          git add -A
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "Import validated corrected OGS source snapshot $VALIDATED_SHA"
+          git push origin HEAD:main
+
+      - name: Verify published source snapshot
+        shell: bash
+        run: |
+          set -euxo pipefail
+          test -f CMakeLists.txt
+          test -f LICENSE.txt
+          test -f ProcessLib/ComponentTransport/ComponentTransportFEM.h
+          grep -Fq 'NUMO: positivity-preserving row-sum lumping of the reaction projection' \
+            ProcessLib/ComponentTransport/ComponentTransportFEM.h
+          git ls-files -s | grep '^160000 ' || true

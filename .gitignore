@@ -1,0 +1,6 @@
+ogs-src/
+ogs-build/
+bin/
+numo-output/
+numo-case/*
+!numo-case/README.md

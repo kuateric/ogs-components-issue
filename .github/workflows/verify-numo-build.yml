@@ -1,0 +1,74 @@
+name: Verify NUMO OGS build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ProcessLib/**'
+      - 'Applications/**'
+      - 'BaseLib/**'
+      - 'ChemistryLib/**'
+      - 'MaterialLib/**'
+      - 'MathLib/**'
+      - 'MeshLib/**'
+      - 'NumLib/**'
+      - 'CMakeLists.txt'
+      - 'CMakePresets.json'
+      - '.github/workflows/verify-numo-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CPM_SOURCE_CACHE: ${{ github.workspace }}/.cpm-cache
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Verify correction is present
+        shell: bash
+        run: |
+          set -euxo pipefail
+          test -f LICENSE.txt
+          test -f CMakeLists.txt
+          grep -Fq 'NUMO: positivity-preserving row-sum lumping of the reaction projection' \
+            ProcessLib/ComponentTransport/ComponentTransportFEM.h
+
+      - name: Install build prerequisites
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential cmake ninja-build git python3
+
+      - name: Restore OGS dependency cache
+        uses: actions/cache@v4
+        with:
+          path: .cpm-cache
+          key: ogs-numo-public-6.5.8-cpm-v1
+
+      - name: Configure focused ComponentTransport build
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cmake --preset release \
+            -DOGS_BUILD_GUI=OFF \
+            -DOGS_BUILD_UTILS=OFF \
+            -DOGS_BUILD_TESTING=OFF \
+            '-DOGS_BUILD_PROCESSES=ComponentTransport'
+
+      - name: Build OGS
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cmake --build --preset release --parallel 2 --target ogs
+          OGS_BIN="$(find ../build/release ../build -type f -name ogs -perm -111 2>/dev/null | head -n1)"
+          test -n "$OGS_BIN"
+          "$OGS_BIN" --version

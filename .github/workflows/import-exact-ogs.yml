@@ -13,15 +13,29 @@ jobs:
   import:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Import exact validated OGS source
         shell: bash
         run: |
           set -euxo pipefail
-          echo "Importing validated NUMO OGS source..."
-          git init repo
-          cd repo
+          SOURCE_BRANCH=agent/numo-reaction-mass-lumping-6.5.8
+          VALIDATED_SHA=5e0c4c0971996d36112e30508074d8f56fb2a60d
+
           git remote add source https://github.com/kuateric/ogs.git
-          git remote add target https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
-          git fetch --depth=1 source 5e0c4c0971996d36112e30508074d8f56fb2a60d
-          test "$(git rev-parse FETCH_HEAD)" = "5e0c4c0971996d36112e30508074d8f56fb2a60d"
-          git push target FETCH_HEAD:refs/heads/main --force
+
+          # Fetch the complete source branch history. A shallow fetch cannot be
+          # pushed into this independent repository because all parent commit
+          # objects referenced by the validated commit must be present.
+          git fetch source "$SOURCE_BRANCH"
+          git cat-file -e "$VALIDATED_SHA^{commit}"
+          test "$(git rev-parse "$VALIDATED_SHA")" = "$VALIDATED_SHA"
+
+          # Safety gate: publish only a source tree containing the validated fix.
+          git show "$VALIDATED_SHA:ProcessLib/ComponentTransport/ComponentTransportFEM.h" \
+            | grep -Fq 'NUMO: positivity-preserving row-sum lumping of the reaction projection'
+
+          # Publish exactly the validated corrected source as main.
+          git push origin "$VALIDATED_SHA:refs/heads/main" --force

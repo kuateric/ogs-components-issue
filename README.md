@@ -12,6 +12,8 @@ This public repository contains a complete OpenGeoSys source snapshot prepared f
 
 The correction uses an RHS-consistent, row-sum-lumped reaction projection for the ComponentTransport/PHREEQC coupling. It removes the projection-induced negative nodal concentration/NaN behaviour found in the original calculation while preserving the element-integrated reaction mass.
 
+Detailed source provenance is recorded in [`SOURCE_PROVENANCE.md`](SOURCE_PROVENANCE.md).
+
 ## 1. Clone
 
 ```bash
@@ -65,6 +67,8 @@ Check the executable with:
 ../build/release/bin/ogs --version
 ```
 
+Because this repository is a self-contained source snapshot with its own Git history, `ogs --version` reports the current `ogs-numo` snapshot commit. The exact validated source origin remains `kuateric/ogs@5e0c4c0971996d36112e30508074d8f56fb2a60d` as documented above and in `SOURCE_PROVENANCE.md`.
+
 ## 5. Place the original NUMO input files locally
 
 The NUMO project files are intentionally **not published in this public repository**. Use the original files already available to NUMO and place them together in a local directory, for example `numo-case/`.
@@ -92,18 +96,23 @@ From the directory containing the NUMO files:
   -o results
 ```
 
-For example, when `ogs-numo` and `numo-case` are sibling directories and the standard preset was used:
+For example, when the local case is stored at `ogs-numo/numo-case/` and the standard preset was used:
 
 ```bash
+cd numo-case
 mkdir -p results
 ../../build/release/bin/ogs \
   shotcrete4_linear_closed_fixed_primary_D1e-12.prj \
   -o results
 ```
 
+## Build verification
+
+The public source snapshot has been independently configured and compiled on a GitHub-hosted Ubuntu 24.04 runner. Verification run `34542043880` completed successfully and produced the corrected ComponentTransport-enabled `ogs` executable. The AWS/BGE self-hosted runner was not used for this packaging verification.
+
 ## Reproducibility note
 
-The source snapshot is intentionally distributed as a directly buildable repository. The upstream CI workflow files from the development repository are not required to compile or run OGS and are not part of the source handoff. A small repository-local GitHub Actions build check verifies that the public snapshot still configures and builds the corrected ComponentTransport executable on Ubuntu 24.04.
+The source snapshot is intentionally distributed as a directly buildable repository. A small repository-local GitHub Actions build check verifies that the public snapshot still configures and builds the corrected ComponentTransport executable on Ubuntu 24.04.
 
 ## License
 

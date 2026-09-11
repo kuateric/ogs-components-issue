@@ -1,24 +1,24 @@
-# OGS-NUMO reproducible source package
+# OpenGeoSys ComponentTransport reaction mass-lumping correction
 
-This public repository contains a complete OpenGeoSys source snapshot prepared for reproducing the NUMO reactive-transport calculation discussed with BGE TECHNOLOGY.
+This public repository contains a complete OpenGeoSys source snapshot with a correction to the ComponentTransport/PHREEQC reaction projection.
 
-## Validated source state
+## Corrected source state
 
-- Source basis: OpenGeoSys 6.5.8 development line used for the NUMO investigation.
-- Validated corrected source commit in `kuateric/ogs`: `5e0c4c0971996d36112e30508074d8f56fb2a60d`.
-- The ComponentTransport correction is already integrated directly in `ProcessLib/ComponentTransport/ComponentTransportFEM.h`.
+- Source basis: OpenGeoSys 6.5.8 development line used during the investigation.
+- Validated corrected source origin: `kuateric/ogs@5e0c4c0971996d36112e30508074d8f56fb2a60d`.
+- The ComponentTransport correction is integrated directly in `ProcessLib/ComponentTransport/ComponentTransportFEM.h`.
 - No patch script and no second OGS repository are required.
-- The NUMO chemistry, physics, boundary conditions and time stepping are not modified by this repository.
+- The correction does not require changes to model chemistry, physics, boundary conditions, or time stepping.
 
-The correction uses an RHS-consistent, row-sum-lumped reaction projection for the ComponentTransport/PHREEQC coupling. It removes the projection-induced negative nodal concentration/NaN behaviour found in the original calculation while preserving the element-integrated reaction mass.
+The correction uses an RHS-consistent, row-sum-lumped reaction projection for the ComponentTransport/PHREEQC coupling. It addresses projection-induced negative nodal concentrations and resulting NaN behaviour while preserving the element-integrated reaction mass.
 
 Detailed source provenance is recorded in [`SOURCE_PROVENANCE.md`](SOURCE_PROVENANCE.md).
 
 ## 1. Clone
 
 ```bash
-git clone https://github.com/kuateric/ogs-numo.git
-cd ogs-numo
+git clone https://github.com/kuateric/ogs-components-issue.git
+cd ogs-components-issue
 ```
 
 ## 2. Install build prerequisites (Ubuntu 24.04)
@@ -31,7 +31,7 @@ sudo apt-get install -y --no-install-recommends \
 
 OGS obtains the remaining third-party dependencies through its normal CMake/CPM mechanism during configuration.
 
-## 3. Configure the focused ComponentTransport build
+## 3. Configure a focused ComponentTransport build
 
 ```bash
 cmake --preset release \
@@ -67,52 +67,25 @@ Check the executable with:
 ../build/release/bin/ogs --version
 ```
 
-Because this repository is a self-contained source snapshot with its own Git history, `ogs --version` reports the current `ogs-numo` snapshot commit. The exact validated source origin remains `kuateric/ogs@5e0c4c0971996d36112e30508074d8f56fb2a60d` as documented above and in `SOURCE_PROVENANCE.md`.
+Because this repository is a self-contained source snapshot with its own Git history, `ogs --version` reports the current repository snapshot commit. The exact validated source origin is documented above and in `SOURCE_PROVENANCE.md`.
 
-## 5. Place the original NUMO input files locally
+## 5. Run a ComponentTransport/PHREEQC project
 
-The NUMO project files are intentionally **not published in this public repository**. Use the original files already available to NUMO and place them together in a local directory, for example `numo-case/`.
-
-The calculation used the following original filenames:
-
-```text
-shotcrete4_linear_closed_fixed_primary_D1e-12.prj
-shotcrete4_linear5nodes.vtu
-fixed_groundwater.vtu
-shotcrete4_linear_closed_fixed_primary_D1e-12_phreeqc.inp
-shotcrete4_linear_closed_fixed_primary_D1e-12_phreeqc.out
-PHREEQC17v108_beta_with_exchange_cvode_knobs1e-12_kin1e-12_cells1-100_d2u.dat
-```
-
-If the local copies contain download suffixes such as `(2)` or `(3)`, keep the file contents unchanged but use the filenames referenced by the `.prj` and PHREEQC input files.
-
-## 6. Run the unchanged NUMO project
-
-From the directory containing the NUMO files:
+Keep project-specific input data outside the public repository when those files are not intended for publication. From the directory containing a project file, run for example:
 
 ```bash
 /path/to/build/release/bin/ogs \
-  shotcrete4_linear_closed_fixed_primary_D1e-12.prj \
-  -o results
-```
-
-For example, when the local case is stored at `ogs-numo/numo-case/` and the standard preset was used:
-
-```bash
-cd numo-case
-mkdir -p results
-../../build/release/bin/ogs \
-  shotcrete4_linear_closed_fixed_primary_D1e-12.prj \
+  project.prj \
   -o results
 ```
 
 ## Build verification
 
-The public source snapshot has been independently configured and compiled on a GitHub-hosted Ubuntu 24.04 runner. Verification run `34542043880` completed successfully and produced the corrected ComponentTransport-enabled `ogs` executable. The AWS/BGE self-hosted runner was not used for this packaging verification.
+This public source snapshot has been independently configured and compiled on a GitHub-hosted Ubuntu 24.04 runner. Verification run `34542043880` completed successfully and produced the corrected ComponentTransport-enabled `ogs` executable.
 
 ## Reproducibility note
 
-The source snapshot is intentionally distributed as a directly buildable repository. A small repository-local GitHub Actions build check verifies that the public snapshot still configures and builds the corrected ComponentTransport executable on Ubuntu 24.04.
+The source snapshot is intentionally distributed as a directly buildable repository. A repository-local GitHub Actions build check verifies that the public snapshot still configures and builds the corrected ComponentTransport executable on Ubuntu 24.04.
 
 ## License
 
@@ -120,4 +93,4 @@ OpenGeoSys is distributed under the Modified BSD License. The original `LICENSE.
 
 ## OpenGeoSys
 
-OpenGeoSys is an open-source scientific project for coupled thermo-hydro-mechanical-chemical processes in porous and fractured media. General OGS documentation is available at https://www.opengeosys.org/docs/.
+OpenGeoSys is an open-source scientific project for coupled thermo-hydro-mechanical-chemical processes in porous and fractured media. General documentation is available at https://www.opengeosys.org/docs/.
